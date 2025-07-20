@@ -135,6 +135,6 @@ button[type="submit"] {
 .footer {
   display: flex;
   gap: 8px;
-  position: fixed;
+  position: absolute;
   bottom: 16px;
 }

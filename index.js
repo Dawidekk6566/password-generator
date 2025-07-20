@@ -19,15 +19,15 @@ generateButton.addEventListener("click", () => {
 
   let characters = "qwertyuiopasdfghjklzxcvbnm";
 
-  if (bigLetters.checked == true) {
+  if (bigLetters.checked) {
     characters += "QWERTYUIOPASDFGHJKLZXCVBNM";
   }
 
-  if (numbers.checked == true) {
+  if (numbers.checked) {
     characters += "1234567890";
   }
 
-  if (specialCharacters.checked == true) {
+  if (specialCharacters.checked) {
     characters += "!@#$%^&*";
   }
 
@@ -49,4 +49,5 @@ copyButton.addEventListener("click", () => {
 
   navigator.clipboard.writeText(copiedPassword);
   console.log(`skopiowano ${copiedPassword}`);
+  alert("Skopiowano hasło do schowka");
 });

@@ -131,3 +131,10 @@ button[type="submit"] {
   border: none;
   background: none;
 }
+
+.footer {
+  display: flex;
+  gap: 8px;
+  position: fixed;
+  bottom: 16px;
+}

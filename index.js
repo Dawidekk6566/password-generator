@@ -6,8 +6,8 @@ const copyButton = document.getElementById("copyButton");
 let passwordField = document.getElementById("passwordField");
 
 const bigLetters = document.getElementById("bigLetters");
-const numbers = document.getElementById("numbers");
-const specialCharacters = document.getElementById("specialCharacters");
+const numbersCheckbox = document.getElementById("numbers");
+const specialCheckbox = document.getElementById("specialCharacters");
 
 input.oninput = function () {
   inputStatus.innerHTML = input.value;
@@ -17,28 +17,40 @@ generateButton.addEventListener("click", () => {
   let passwordLength = input.value;
   let password = "";
 
-  let characters = "qwertyuiopasdfghjklzxcvbnm";
+  const lowercase = "qwertyuiopasdfghjklzxcvbnm";
+  const uppercase = "QWERTYUIOPASDFGHJKLZXCVBNM";
+  const digits = "1234567890";
+  const special = "!@#$%^&*";
+
+  let allCharacters = lowercase;
+  let requiredCharacters = "";
 
   if (bigLetters.checked) {
-    characters += "QWERTYUIOPASDFGHJKLZXCVBNM";
+    allCharacters += uppercase;
+    requiredCharacters +=
+      uppercase[Math.floor(Math.random() * uppercase.length)];
   }
 
-  if (numbers.checked) {
-    characters += "1234567890";
+  if (numbersCheckbox.checked) {
+    allCharacters += digits;
+    requiredCharacters += digits[Math.floor(Math.random() * digits.length)];
   }
 
-  if (specialCharacters.checked) {
-    characters += "!@#$%^&*";
+  if (specialCheckbox.checked) {
+    allCharacters += special;
+    requiredCharacters += special[Math.floor(Math.random() * special.length)];
   }
 
   console.log(
-    `Obecna długość hasła: ${passwordLength}, a aktualne znaki to ${characters}`
+    `Obecna długość hasła: ${passwordLength}, a aktualne znaki to ${allCharacters}`
   );
 
-  for (i = 0; i < passwordLength; i++) {
-    let randomIndexes = Math.floor(Math.random() * characters.length);
-    password += characters[randomIndexes];
+  for (let i = requiredCharacters.length; i < passwordLength; i++) {
+    password += allCharacters[Math.floor(Math.random() * allCharacters.length)];
   }
+
+  password += requiredCharacters;
+
   console.log(password);
 
   passwordField.textContent = password;
@@ -48,6 +60,5 @@ copyButton.addEventListener("click", () => {
   const copiedPassword = passwordField.textContent;
 
   navigator.clipboard.writeText(copiedPassword);
-  console.log(`skopiowano ${copiedPassword}`);
   alert("Skopiowano hasło do schowka");
 });
